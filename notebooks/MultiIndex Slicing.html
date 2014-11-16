@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Timedeltas</title>
+<title>MultiIndex Slicing</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1680,7 +1680,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Timedeltas">Timedeltas<a class="anchor-link" href="#Timedeltas">&#182;</a></h1>
+<h1 id="Multi-Index-Slicers">Multi Index Slicers<a class="anchor-link" href="#Multi-Index-Slicers">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1690,211 +1690,9 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>docs: http://pandas.pydata.org/pandas-docs/stable/timedeltas.html</p>
+<p>docs: http://pandas.pydata.org/pandas-docs/stable/advanced.html#using-slicers</p>
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[1]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># partition the timedeltas</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">datetime</span>    
-<span class="n">rawdata</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_1.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_2.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_3.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_4.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_5.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_6.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)}]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rawdata</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[1]:</div>
-
-<div class="output_html rendered_html output_subarea output_pyout">
-<div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>filename</th>
-      <th>timestamp</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> image_1.jpg</td>
-      <td>2014-11-13 19:14:16.152847</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> image_2.jpg</td>
-      <td>2014-11-13 19:17:16.152847</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> image_3.jpg</td>
-      <td>2014-11-13 19:20:16.152847</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> image_4.jpg</td>
-      <td>2014-11-13 20:14:16.152847</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td> image_5.jpg</td>
-      <td>2014-11-13 20:17:16.152847</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td> image_6.jpg</td>
-      <td>2014-11-13 20:20:16.152847</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[2]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
-<span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[2]:</div>
-
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-0    0
-1    0
-2    0
-3    1
-4    1
-5    1
-Name: timestamp, dtype: int64
-</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[13]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c"># sectioned grouping &amp; timedeltas</span>
-<span class="n">data</span> <span class="o">=</span> <span class="s">&quot;,date,value</span><span class="se">\n</span><span class="s">0,2014-11-13 18:06:00,1</span><span class="se">\n</span><span class="s">1,2014-11-13 21:56:00,0</span><span class="se">\n</span><span class="s">2,2014-11-14 03:40:00,1</span><span class="se">\n</span><span class="s">3,2014-11-14 03:55:00,1</span><span class="se">\n</span><span class="s">4,2014-11-14 05:09:00,0</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">],</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">df</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[13]:</div>
-
-<div class="output_html rendered_html output_subarea output_pyout">
-<div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2014-11-13 18:06:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2014-11-13 21:56:00</td>
-      <td> 0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2014-11-14 03:40:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2014-11-14 03:55:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2014-11-14 05:09:00</td>
-      <td> 0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -1903,35 +1701,11 @@ In&nbsp;[29]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c">#Create the grouper. This is a sectioner, that is it find the breakpoints where the value changes and creates groups based on that.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s">&#39;max_rows&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span> <span class="k">as</span> <span class="n">disp</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[29]:</div>
-
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-0   NaN
-1    -1
-2     1
-3     0
-4    -1
-Name: value, dtype: float64
-</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -1939,12 +1713,30 @@ Name: value, dtype: float64
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[28]:
+In&nbsp;[9]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">grouper</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
-<span class="n">grouper</span>
+<div class="highlight"><pre><span class="c"># create the test data</span>
+<span class="k">def</span> <span class="nf">mklbl</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s">&quot;</span><span class="si">%s%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">prefix</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+
+<span class="n">miindex</span> <span class="o">=</span> <span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_product</span><span class="p">([</span><span class="n">mklbl</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+                                   <span class="n">mklbl</span><span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+                                   <span class="n">mklbl</span><span class="p">(</span><span class="s">&#39;C&#39;</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span>
+                                   <span class="n">mklbl</span><span class="p">(</span><span class="s">&#39;D&#39;</span><span class="p">,</span><span class="mi">2</span><span class="p">)],</span>
+                                  <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;first&#39;</span><span class="p">,</span><span class="s">&#39;second&#39;</span><span class="p">,</span><span class="s">&#39;third&#39;</span><span class="p">,</span><span class="s">&#39;fourth&#39;</span><span class="p">])</span> 
+
+<span class="n">micolumns</span> <span class="o">=</span> <span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">),(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;bar&#39;</span><span class="p">),</span>
+                                    <span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">),(</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;bah&#39;</span><span class="p">)],</span>
+                                     <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;lvl0&#39;</span><span class="p">,</span> <span class="s">&#39;lvl1&#39;</span><span class="p">])</span>
+
+
+<span class="n">dfmi</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">miindex</span><span class="p">)</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">micolumns</span><span class="p">))</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">miindex</span><span class="p">),</span><span class="nb">len</span><span class="p">(</span><span class="n">micolumns</span><span class="p">))),</span>
+                 <span class="n">index</span><span class="o">=</span><span class="n">miindex</span><span class="p">,</span>
+                 <span class="n">columns</span><span class="o">=</span><span class="n">micolumns</span><span class="p">)</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">()</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">dfmi</span>
 </pre></div>
 
 </div>
@@ -1956,18 +1748,166 @@ In&nbsp;[28]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[28]:</div>
+    Out[9]:</div>
 
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-0    0
-1    0
-2    1
-3    1
-4    1
-Name: value, dtype: int64
-</pre>
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="7" valign="top">A0</th>
+      <th rowspan="7" valign="top">B0</th>
+      <th rowspan="2" valign="top">C0</th>
+      <th>D0</th>
+      <td>   1</td>
+      <td>   0</td>
+      <td>   3</td>
+      <td>   2</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>   5</td>
+      <td>   4</td>
+      <td>   7</td>
+      <td>   6</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td>  17</td>
+      <td>  16</td>
+      <td>  19</td>
+      <td>  18</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  21</td>
+      <td>  20</td>
+      <td>  23</td>
+      <td>  22</td>
+    </tr>
+    <tr>
+      <th>C3</th>
+      <th>D0</th>
+      <td>  25</td>
+      <td>  24</td>
+      <td>  27</td>
+      <td>  26</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="7" valign="top">A3</th>
+      <th rowspan="7" valign="top">B1</th>
+      <th>C0</th>
+      <th>D1</th>
+      <td> 229</td>
+      <td> 228</td>
+      <td> 231</td>
+      <td> 230</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td> 241</td>
+      <td> 240</td>
+      <td> 243</td>
+      <td> 242</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 245</td>
+      <td> 244</td>
+      <td> 247</td>
+      <td> 246</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C3</th>
+      <th>D0</th>
+      <td> 249</td>
+      <td> 248</td>
+      <td> 251</td>
+      <td> 250</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 253</td>
+      <td> 252</td>
+      <td> 255</td>
+      <td> 254</td>
+    </tr>
+  </tbody>
+</table>
+<p>64 rows × 4 columns</p>
+</div>
 </div>
 
 </div>
@@ -1983,10 +1923,8 @@ In&nbsp;[15]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span>
-
-<span class="c"># Calculate the date columns last value minus the first value, yielding a timedelta. These are per-GROUP (e.g. that&#39;s what the indices represent).</span>
-<span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<div class="highlight"><pre><span class="c"># sorting</span>
+<span class="n">dfmi</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">lexsort_depth</span>
 </pre></div>
 
 </div>
@@ -2003,10 +1941,7 @@ In&nbsp;[15]:
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-value
-0       03:50:00
-1       01:29:00
-Name: date, dtype: timedelta64[ns]
+4
 </pre>
 </div>
 
@@ -2019,13 +1954,11 @@ Name: date, dtype: timedelta64[ns]
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[16]:
+In&nbsp;[12]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># If you wanted to preserve where the original data comes from. This is a transform type of operation.</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">)</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&#39;first&#39;</span><span class="p">)</span>
-<span class="n">result</span>
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s">&#39;third&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2037,17 +1970,207 @@ In&nbsp;[16]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[16]:</div>
+    Out[12]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C0</th>
+      <th>D0</th>
+      <td>   1</td>
+      <td>   0</td>
+      <td>   3</td>
+      <td>   2</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>   5</td>
+      <td>   4</td>
+      <td>   7</td>
+      <td>   6</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C0</th>
+      <th>D0</th>
+      <td>  33</td>
+      <td>  32</td>
+      <td>  35</td>
+      <td>  34</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  37</td>
+      <td>  36</td>
+      <td>  39</td>
+      <td>  38</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C0</th>
+      <th>D0</th>
+      <td>  65</td>
+      <td>  64</td>
+      <td>  67</td>
+      <td>  66</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  69</td>
+      <td>  68</td>
+      <td>  71</td>
+      <td>  70</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C0</th>
+      <th>D0</th>
+      <td>  97</td>
+      <td>  96</td>
+      <td>  99</td>
+      <td>  98</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C3</th>
+      <th>D1</th>
+      <td> 157</td>
+      <td> 156</td>
+      <td> 159</td>
+      <td> 158</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C3</th>
+      <th>D0</th>
+      <td> 185</td>
+      <td> 184</td>
+      <td> 187</td>
+      <td> 186</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 189</td>
+      <td> 188</td>
+      <td> 191</td>
+      <td> 190</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C3</th>
+      <th>D0</th>
+      <td> 217</td>
+      <td> 216</td>
+      <td> 219</td>
+      <td> 218</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 221</td>
+      <td> 220</td>
+      <td> 223</td>
+      <td> 222</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C3</th>
+      <th>D0</th>
+      <td> 249</td>
+      <td> 248</td>
+      <td> 251</td>
+      <td> 250</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 253</td>
+      <td> 252</td>
+      <td> 255</td>
+      <td> 254</td>
+    </tr>
+  </tbody>
+</table>
+<p>64 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[14]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">sortlevel</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="s">&#39;third&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">lexsort_depth</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[14]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-0   03:50:00
-1   03:50:00
-2   01:29:00
-3   01:29:00
-4   01:29:00
-dtype: timedelta64[ns]
+0
 </pre>
 </div>
 
@@ -2060,12 +2183,11 @@ dtype: timedelta64[ns]
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[18]:
+In&nbsp;[19]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># Then you need to select the indices where the original breakpoints happen.</span>
-<span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">grouper</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">take_last</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">xs</span><span class="p">(</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="s">&#39;third&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2077,15 +2199,744 @@ In&nbsp;[18]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[18]:</div>
+    Out[19]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+      <td>  43</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  45</td>
+      <td>  44</td>
+      <td>  47</td>
+      <td>  46</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td>  72</td>
+      <td>  75</td>
+      <td>  74</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  77</td>
+      <td>  76</td>
+      <td>  79</td>
+      <td>  78</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 104</td>
+      <td> 107</td>
+      <td> 106</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>D1</th>
+      <td> 141</td>
+      <td> 140</td>
+      <td> 143</td>
+      <td> 142</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 168</td>
+      <td> 171</td>
+      <td> 170</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 173</td>
+      <td> 172</td>
+      <td> 175</td>
+      <td> 174</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>D0</th>
+      <td> 201</td>
+      <td> 200</td>
+      <td> 203</td>
+      <td> 202</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 205</td>
+      <td> 204</td>
+      <td> 207</td>
+      <td> 206</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[33]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">),</span><span class="s">&#39;C1&#39;</span><span class="p">),:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
-<div class="output_text output_subarea output_pyout">
-<pre>
-1   03:50:00
-4   01:29:00
-dtype: timedelta64[ns]
-</pre>
+<div class="output_area"><div class="prompt output_prompt">
+    Out[33]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+      <td>  43</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  45</td>
+      <td>  44</td>
+      <td>  47</td>
+      <td>  46</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td>  72</td>
+      <td>  75</td>
+      <td>  74</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  77</td>
+      <td>  76</td>
+      <td>  79</td>
+      <td>  78</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 104</td>
+      <td> 107</td>
+      <td> 106</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C1</th>
+      <th>D1</th>
+      <td> 141</td>
+      <td> 140</td>
+      <td> 143</td>
+      <td> 142</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 168</td>
+      <td> 171</td>
+      <td> 170</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 173</td>
+      <td> 172</td>
+      <td> 175</td>
+      <td> 174</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 201</td>
+      <td> 200</td>
+      <td> 203</td>
+      <td> 202</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 205</td>
+      <td> 204</td>
+      <td> 207</td>
+      <td> 206</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[31]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># new syntax</span>
+<span class="n">idx</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">IndexSlice</span>
+
+<span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,:,</span><span class="s">&#39;C1&#39;</span><span class="p">,:],:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[31]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+      <td>  43</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  45</td>
+      <td>  44</td>
+      <td>  47</td>
+      <td>  46</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td>  72</td>
+      <td>  75</td>
+      <td>  74</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  77</td>
+      <td>  76</td>
+      <td>  79</td>
+      <td>  78</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 104</td>
+      <td> 107</td>
+      <td> 106</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C1</th>
+      <th>D1</th>
+      <td> 141</td>
+      <td> 140</td>
+      <td> 143</td>
+      <td> 142</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 168</td>
+      <td> 171</td>
+      <td> 170</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 173</td>
+      <td> 172</td>
+      <td> 175</td>
+      <td> 174</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 201</td>
+      <td> 200</td>
+      <td> 203</td>
+      <td> 202</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 205</td>
+      <td> 204</td>
+      <td> 207</td>
+      <td> 206</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[23]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],:],:]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[23]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="7" valign="top">A0</th>
+      <th rowspan="4" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td>  17</td>
+      <td>  16</td>
+      <td>  19</td>
+      <td>  18</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  21</td>
+      <td>  20</td>
+      <td>  23</td>
+      <td>  22</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+      <td>  43</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  45</td>
+      <td>  44</td>
+      <td>  47</td>
+      <td>  46</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  49</td>
+      <td>  48</td>
+      <td>  51</td>
+      <td>  50</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="7" valign="top">A3</th>
+      <th rowspan="3" valign="top">B0</th>
+      <th>C1</th>
+      <th>D1</th>
+      <td> 205</td>
+      <td> 204</td>
+      <td> 207</td>
+      <td> 206</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td> 209</td>
+      <td> 208</td>
+      <td> 211</td>
+      <td> 210</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 213</td>
+      <td> 212</td>
+      <td> 215</td>
+      <td> 214</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td> 241</td>
+      <td> 240</td>
+      <td> 243</td>
+      <td> 242</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 245</td>
+      <td> 244</td>
+      <td> 247</td>
+      <td> 246</td>
+    </tr>
+  </tbody>
+</table>
+<p>32 rows × 4 columns</p>
+</div>
 </div>
 
 </div>
@@ -2101,8 +2952,7 @@ In&nbsp;[26]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># alternatively</span>
-<span class="n">g</span><span class="o">.</span><span class="n">groups</span>
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],</span><span class="s">&#39;D0&#39;</span><span class="p">],:]</span>
 </pre></div>
 
 </div>
@@ -2116,11 +2966,178 @@ In&nbsp;[26]:
 <div class="output_area"><div class="prompt output_prompt">
     Out[26]:</div>
 
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-{0: [0, 1], 1: [2, 3, 4]}
-</pre>
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+      <td>  11</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  17</td>
+      <td>  16</td>
+      <td>  19</td>
+      <td>  18</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+      <td>  43</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  49</td>
+      <td>  48</td>
+      <td>  51</td>
+      <td>  50</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td>  72</td>
+      <td>  75</td>
+      <td>  74</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  81</td>
+      <td>  80</td>
+      <td>  83</td>
+      <td>  82</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 104</td>
+      <td> 107</td>
+      <td> 106</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 145</td>
+      <td> 144</td>
+      <td> 147</td>
+      <td> 146</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 168</td>
+      <td> 171</td>
+      <td> 170</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 177</td>
+      <td> 176</td>
+      <td> 179</td>
+      <td> 178</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 201</td>
+      <td> 200</td>
+      <td> 203</td>
+      <td> 202</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 209</td>
+      <td> 208</td>
+      <td> 211</td>
+      <td> 210</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+      <td> 235</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 241</td>
+      <td> 240</td>
+      <td> 243</td>
+      <td> 242</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 4 columns</p>
+</div>
 </div>
 
 </div>
@@ -2136,7 +3153,7 @@ In&nbsp;[27]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span> <span class="n">g_indexer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">grp</span><span class="p">,</span><span class="n">g_indexer</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]]</span>
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],</span><span class="s">&#39;D0&#39;</span><span class="p">],</span><span class="s">&#39;a&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -2150,17 +3167,780 @@ In&nbsp;[27]:
 <div class="output_area"><div class="prompt output_prompt">
     Out[27]:</div>
 
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-1   03:50:00
-4   01:29:00
-dtype: timedelta64[ns]
-</pre>
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>   8</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  17</td>
+      <td>  16</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  41</td>
+      <td>  40</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  49</td>
+      <td>  48</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td>  72</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  81</td>
+      <td>  80</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 104</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 145</td>
+      <td> 144</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 168</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 177</td>
+      <td> 176</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 201</td>
+      <td> 200</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 209</td>
+      <td> 208</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 232</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 241</td>
+      <td> 240</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 2 columns</p>
+</div>
 </div>
 
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[28]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[:,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],</span><span class="s">&#39;D0&#39;</span><span class="p">],</span><span class="n">idx</span><span class="p">[:,</span><span class="s">&#39;foo&#39;</span><span class="p">]]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[28]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>foo</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A0</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>   8</td>
+      <td>  10</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  16</td>
+      <td>  18</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  40</td>
+      <td>  42</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  48</td>
+      <td>  50</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td>  72</td>
+      <td>  74</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td>  80</td>
+      <td>  82</td>
+    </tr>
+    <tr>
+      <th>B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 104</td>
+      <td> 106</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">A2</th>
+      <th>B0</th>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 144</td>
+      <td> 146</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 168</td>
+      <td> 170</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 176</td>
+      <td> 178</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 200</td>
+      <td> 202</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 208</td>
+      <td> 210</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 232</td>
+      <td> 234</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 240</td>
+      <td> 242</td>
+    </tr>
+  </tbody>
+</table>
+<p>16 rows × 2 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[34]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c">#setting</span>
+<span class="n">i_rows</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],</span><span class="s">&#39;D0&#39;</span><span class="p">]</span>
+<span class="n">i_cols</span> <span class="o">=</span> <span class="n">idx</span><span class="p">[:,</span><span class="s">&#39;foo&#39;</span><span class="p">]</span>
+<span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i_rows</span><span class="p">,</span><span class="n">i_cols</span><span class="p">]</span> <span class="o">*=</span> <span class="mi">2</span>
+<span class="n">dfmi</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[34]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="7" valign="top">A0</th>
+      <th rowspan="7" valign="top">B0</th>
+      <th rowspan="2" valign="top">C0</th>
+      <th>D0</th>
+      <td>   1</td>
+      <td>   0</td>
+      <td>   3</td>
+      <td>   2</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>   5</td>
+      <td>   4</td>
+      <td>   7</td>
+      <td>   6</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>   9</td>
+      <td>  16</td>
+      <td>  11</td>
+      <td>  20</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  13</td>
+      <td>  12</td>
+      <td>  15</td>
+      <td>  14</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td>  17</td>
+      <td>  32</td>
+      <td>  19</td>
+      <td>  36</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  21</td>
+      <td>  20</td>
+      <td>  23</td>
+      <td>  22</td>
+    </tr>
+    <tr>
+      <th>C3</th>
+      <th>D0</th>
+      <td>  25</td>
+      <td>  24</td>
+      <td>  27</td>
+      <td>  26</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="7" valign="top">A3</th>
+      <th rowspan="7" valign="top">B1</th>
+      <th>C0</th>
+      <th>D1</th>
+      <td> 229</td>
+      <td> 228</td>
+      <td> 231</td>
+      <td> 230</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 233</td>
+      <td> 464</td>
+      <td> 235</td>
+      <td> 468</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 237</td>
+      <td> 236</td>
+      <td> 239</td>
+      <td> 238</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C2</th>
+      <th>D0</th>
+      <td> 241</td>
+      <td> 480</td>
+      <td> 243</td>
+      <td> 484</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 245</td>
+      <td> 244</td>
+      <td> 247</td>
+      <td> 246</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">C3</th>
+      <th>D0</th>
+      <td> 249</td>
+      <td> 248</td>
+      <td> 251</td>
+      <td> 250</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 253</td>
+      <td> 252</td>
+      <td> 255</td>
+      <td> 254</td>
+    </tr>
+  </tbody>
+</table>
+<p>64 rows × 4 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[37]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># boolean selections</span>
+<span class="n">dfmi</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="n">dfmi</span><span class="p">[(</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">)]</span><span class="o">&gt;</span><span class="mi">200</span><span class="p">,:,[</span><span class="s">&#39;C1&#39;</span><span class="p">,</span><span class="s">&#39;C2&#39;</span><span class="p">],</span><span class="s">&#39;D0&#39;</span><span class="p">],</span><span class="n">idx</span><span class="p">[:,</span><span class="s">&#39;foo&#39;</span><span class="p">]]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[37]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>foo</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="2" valign="top">A1</th>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 208</td>
+      <td> 212</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 224</td>
+      <td> 228</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A2</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 272</td>
+      <td> 276</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 288</td>
+      <td> 292</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 336</td>
+      <td> 340</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 352</td>
+      <td> 356</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A3</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 400</td>
+      <td> 404</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 416</td>
+      <td> 420</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th>C1</th>
+      <th>D0</th>
+      <td> 464</td>
+      <td> 468</td>
+    </tr>
+    <tr>
+      <th>C2</th>
+      <th>D0</th>
+      <td> 480</td>
+      <td> 484</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[43]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre><span class="c"># addtl syntax (not implemented)</span>
+<span class="c"># dfmi.loc[{ &#39;second&#39; : [&#39;B1&#39;,&#39;B2&#39;], &#39;third&#39; : &#39;C1&#39; }]</span>
+
+<span class="c"># via query</span>
+<span class="n">dfmi</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="s">&quot;first in [&#39;A1&#39;,&#39;A2&#39;] and third == &#39;C1&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">
+    Out[43]:</div>
+
+<div class="output_html rendered_html output_subarea output_pyout">
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl0</th>
+      <th colspan="2" halign="left">a</th>
+      <th colspan="2" halign="left">b</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>lvl1</th>
+      <th>bar</th>
+      <th>foo</th>
+      <th>bah</th>
+      <th>foo</th>
+    </tr>
+    <tr>
+      <th>first</th>
+      <th>second</th>
+      <th>third</th>
+      <th>fourth</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">A1</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td>  73</td>
+      <td> 144</td>
+      <td>  75</td>
+      <td> 148</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td>  77</td>
+      <td>  76</td>
+      <td>  79</td>
+      <td>  78</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 105</td>
+      <td> 208</td>
+      <td> 107</td>
+      <td> 212</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 109</td>
+      <td> 108</td>
+      <td> 111</td>
+      <td> 110</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">A2</th>
+      <th rowspan="2" valign="top">B0</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 137</td>
+      <td> 272</td>
+      <td> 139</td>
+      <td> 276</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 141</td>
+      <td> 140</td>
+      <td> 143</td>
+      <td> 142</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">B1</th>
+      <th rowspan="2" valign="top">C1</th>
+      <th>D0</th>
+      <td> 169</td>
+      <td> 336</td>
+      <td> 171</td>
+      <td> 340</td>
+    </tr>
+    <tr>
+      <th>D1</th>
+      <td> 173</td>
+      <td> 172</td>
+      <td> 175</td>
+      <td> 174</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">
+In&nbsp;[]:
+</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight"><pre> 
+</pre></div>
+
+</div>
 </div>
 </div>
 

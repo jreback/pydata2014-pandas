@@ -3,7 +3,7 @@
 <head>
 
 <meta charset="utf-8" />
-<title>Timedeltas</title>
+<title>Groupby Enhancements</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -1680,7 +1680,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Timedeltas">Timedeltas<a class="anchor-link" href="#Timedeltas">&#182;</a></h1>
+<h1 id="Groupby-Enhancements">Groupby Enhancements<a class="anchor-link" href="#Groupby-Enhancements">&#182;</a></h1>
 </div>
 </div>
 </div>
@@ -1690,7 +1690,7 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>docs: http://pandas.pydata.org/pandas-docs/stable/timedeltas.html</p>
+<p>docs: http://pandas.pydata.org/pandas-docs/stable/groupby.html#grouping-with-a-grouper-specification</p>
 </div>
 </div>
 </div>
@@ -1701,22 +1701,21 @@ In&nbsp;[1]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># partition the timedeltas</span>
-<span class="kn">import</span> <span class="nn">pandas</span>
-<span class="kn">import</span> <span class="nn">datetime</span>    
-<span class="n">rawdata</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_1.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_2.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_3.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_4.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_5.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)},</span>
- <span class="p">{</span><span class="s">&#39;filename&#39;</span><span class="p">:</span> <span class="s">&#39;image_6.jpg&#39;</span><span class="p">,</span>
-  <span class="s">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">152847</span><span class="p">)}]</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rawdata</span><span class="p">)</span>
+<div class="highlight"><pre><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span>
+             <span class="s">&#39;Branch&#39;</span> <span class="p">:</span> <span class="s">&#39;A A A A A A A B&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+             <span class="s">&#39;Buyer&#39;</span><span class="p">:</span> <span class="s">&#39;Carl Mark Carl Carl Joe Joe Joe Carl&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">(),</span>
+             <span class="s">&#39;Quantity&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span>
+             <span class="s">&#39;Date&#39;</span> <span class="p">:</span> <span class="p">[</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="n">datetime</span><span class="p">(</span><span class="mi">2013</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>
+                 <span class="p">]})</span>
 <span class="n">df</span>
 </pre></div>
 
@@ -1737,40 +1736,68 @@ In&nbsp;[1]:
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>filename</th>
-      <th>timestamp</th>
+      <th>Branch</th>
+      <th>Buyer</th>
+      <th>Date</th>
+      <th>Quantity</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td> image_1.jpg</td>
-      <td>2014-11-13 19:14:16.152847</td>
+      <td> A</td>
+      <td> Carl</td>
+      <td>2013-10-01 13:00:00</td>
+      <td> 1</td>
     </tr>
     <tr>
       <th>1</th>
-      <td> image_2.jpg</td>
-      <td>2014-11-13 19:17:16.152847</td>
+      <td> A</td>
+      <td> Mark</td>
+      <td>2013-10-01 13:05:00</td>
+      <td> 3</td>
     </tr>
     <tr>
       <th>2</th>
-      <td> image_3.jpg</td>
-      <td>2014-11-13 19:20:16.152847</td>
+      <td> A</td>
+      <td> Carl</td>
+      <td>2013-10-01 20:00:00</td>
+      <td> 5</td>
     </tr>
     <tr>
       <th>3</th>
-      <td> image_4.jpg</td>
-      <td>2014-11-13 20:14:16.152847</td>
+      <td> A</td>
+      <td> Carl</td>
+      <td>2013-10-02 10:00:00</td>
+      <td> 1</td>
     </tr>
     <tr>
       <th>4</th>
-      <td> image_5.jpg</td>
-      <td>2014-11-13 20:17:16.152847</td>
+      <td> A</td>
+      <td>  Joe</td>
+      <td>2013-10-01 20:00:00</td>
+      <td> 8</td>
     </tr>
     <tr>
       <th>5</th>
-      <td> image_6.jpg</td>
-      <td>2014-11-13 20:20:16.152847</td>
+      <td> A</td>
+      <td>  Joe</td>
+      <td>2013-10-02 10:00:00</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td> A</td>
+      <td>  Joe</td>
+      <td>2013-10-02 12:00:00</td>
+      <td> 9</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td> B</td>
+      <td> Carl</td>
+      <td>2013-10-02 14:00:00</td>
+      <td> 3</td>
     </tr>
   </tbody>
 </table>
@@ -1790,9 +1817,7 @@ In&nbsp;[2]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
-<span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s">&quot;timestamp&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">minutes</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+<div class="highlight"><pre><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;Buyer&#39;</span><span class="p">)[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1809,13 +1834,11 @@ In&nbsp;[2]:
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-0    0
-1    0
-2    0
-3    1
-4    1
-5    1
-Name: timestamp, dtype: int64
+Buyer
+Carl     4
+Joe      3
+Mark     1
+Name: Quantity, dtype: int64
 </pre>
 </div>
 
@@ -1828,14 +1851,11 @@ Name: timestamp, dtype: int64
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[13]:
+In&nbsp;[3]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># sectioned grouping &amp; timedeltas</span>
-<span class="n">data</span> <span class="o">=</span> <span class="s">&quot;,date,value</span><span class="se">\n</span><span class="s">0,2014-11-13 18:06:00,1</span><span class="se">\n</span><span class="s">1,2014-11-13 21:56:00,0</span><span class="se">\n</span><span class="s">2,2014-11-14 03:40:00,1</span><span class="se">\n</span><span class="s">3,2014-11-14 03:55:00,1</span><span class="se">\n</span><span class="s">4,2014-11-14 05:09:00,0</span><span class="se">\n</span><span class="s">&quot;</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">StringIO</span><span class="p">(</span><span class="n">data</span><span class="p">),</span><span class="n">parse_dates</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">],</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">df</span>
+<div class="highlight"><pre><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">&#39;Date&#39;</span><span class="p">)[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&#39;1D&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;count&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1847,86 +1867,15 @@ In&nbsp;[13]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[13]:</div>
-
-<div class="output_html rendered_html output_subarea output_pyout">
-<div style="max-height:1000px;max-width:1500px;overflow:auto;">
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>date</th>
-      <th>value</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>2014-11-13 18:06:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>2014-11-13 21:56:00</td>
-      <td> 0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>2014-11-14 03:40:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>2014-11-14 03:55:00</td>
-      <td> 1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>2014-11-14 05:09:00</td>
-      <td> 0</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[29]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="c">#Create the grouper. This is a sectioner, that is it find the breakpoints where the value changes and creates groups based on that.</span>
-<span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[29]:</div>
+    Out[3]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-0   NaN
-1    -1
-2     1
-3     0
-4    -1
-Name: value, dtype: float64
+Date
+2013-10-01    4
+2013-10-02    4
+Freq: D, Name: Quantity, dtype: int64
 </pre>
 </div>
 
@@ -1939,12 +1888,12 @@ Name: value, dtype: float64
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[28]:
+In&nbsp;[4]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">grouper</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">==</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
-<span class="n">grouper</span>
+<div class="highlight"><pre><span class="c"># traditional way</span>
+<span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">&#39;Date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;Buyer&#39;</span><span class="p">)[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&#39;1D&#39;</span><span class="p">,</span><span class="n">how</span><span class="o">=</span><span class="s">&#39;count&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -1956,17 +1905,18 @@ In&nbsp;[28]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[28]:</div>
+    Out[4]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-0    0
-1    0
-2    1
-3    1
-4    1
-Name: value, dtype: int64
+Buyer  Date      
+Carl   2013-10-01    2
+       2013-10-02    2
+Joe    2013-10-01    1
+       2013-10-02    2
+Mark   2013-10-01    1
+dtype: int64
 </pre>
 </div>
 
@@ -1979,14 +1929,12 @@ Name: value, dtype: int64
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[15]:
+In&nbsp;[5]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="n">g</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">grouper</span><span class="p">)</span>
-
-<span class="c"># Calculate the date columns last value minus the first value, yielding a timedelta. These are per-GROUP (e.g. that&#39;s what the indices represent).</span>
-<span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">last</span><span class="p">()</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
+<div class="highlight"><pre><span class="c"># groupby then resample</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;Buyer&#39;</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s">&#39;1D&#39;</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;Date&#39;</span><span class="p">)])[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1998,15 +1946,18 @@ In&nbsp;[15]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[15]:</div>
+    Out[5]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-value
-0       03:50:00
-1       01:29:00
-Name: date, dtype: timedelta64[ns]
+Buyer  Date      
+Carl   2013-10-01    2
+       2013-10-02    2
+Joe    2013-10-01    1
+       2013-10-02    2
+Mark   2013-10-01    1
+Name: Quantity, dtype: int64
 </pre>
 </div>
 
@@ -2019,13 +1970,12 @@ Name: date, dtype: timedelta64[ns]
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[16]:
+In&nbsp;[6]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># If you wanted to preserve where the original data comes from. This is a transform type of operation.</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&#39;last&#39;</span><span class="p">)</span><span class="o">-</span><span class="n">g</span><span class="p">[</span><span class="s">&#39;date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="s">&#39;first&#39;</span><span class="p">)</span>
-<span class="n">result</span>
+<div class="highlight"><pre><span class="c"># same but reverse the resample/groupby</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s">&#39;1D&#39;</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;Date&#39;</span><span class="p">),</span><span class="s">&#39;Buyer&#39;</span><span class="p">])[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -2037,17 +1987,18 @@ In&nbsp;[16]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[16]:</div>
+    Out[6]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-0   03:50:00
-1   03:50:00
-2   01:29:00
-3   01:29:00
-4   01:29:00
-dtype: timedelta64[ns]
+Date        Buyer
+2013-10-01  Carl     2
+            Joe      1
+            Mark     1
+2013-10-02  Carl     2
+            Joe      2
+Name: Quantity, dtype: int64
 </pre>
 </div>
 
@@ -2060,12 +2011,12 @@ dtype: timedelta64[ns]
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[18]:
+In&nbsp;[7]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># Then you need to select the indices where the original breakpoints happen.</span>
-<span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">grouper</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">(</span><span class="n">take_last</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+<div class="highlight"><pre><span class="c"># chain multiple groupers easily</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;Buyer&#39;</span><span class="p">,</span><span class="n">pd</span><span class="o">.</span><span class="n">Grouper</span><span class="p">(</span><span class="n">freq</span><span class="o">=</span><span class="s">&#39;1D&#39;</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="s">&#39;Date&#39;</span><span class="p">),</span><span class="s">&#39;Branch&#39;</span><span class="p">])[</span><span class="s">&#39;Quantity&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -2077,14 +2028,19 @@ In&nbsp;[18]:
 
 
 <div class="output_area"><div class="prompt output_prompt">
-    Out[18]:</div>
+    Out[7]:</div>
 
 
 <div class="output_text output_subarea output_pyout">
 <pre>
-1   03:50:00
-4   01:29:00
-dtype: timedelta64[ns]
+Buyer  Date        Branch
+Carl   2013-10-01  A         2
+       2013-10-02  A         1
+                   B         1
+Joe    2013-10-01  A         1
+       2013-10-02  A         2
+Mark   2013-10-01  A         1
+Name: Quantity, dtype: int64
 </pre>
 </div>
 
@@ -2097,70 +2053,14 @@ dtype: timedelta64[ns]
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">
-In&nbsp;[26]:
+In&nbsp;[]:
 </div>
 <div class="inner_cell">
     <div class="input_area">
-<div class="highlight"><pre><span class="c"># alternatively</span>
-<span class="n">g</span><span class="o">.</span><span class="n">groups</span>
+<div class="highlight"><pre> 
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[26]:</div>
-
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-{0: [0, 1], 1: [2, 3, 4]}
-</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">
-In&nbsp;[27]:
-</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class="highlight"><pre><span class="n">result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span> <span class="n">g_indexer</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">grp</span><span class="p">,</span><span class="n">g_indexer</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">groups</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="p">]]</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
-
-
-<div class="output_text output_subarea output_pyout">
-<pre>
-1   03:50:00
-4   01:29:00
-dtype: timedelta64[ns]
-</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
