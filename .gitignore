@@ -1,0 +1,15 @@
+# backup files #
+################
+*~
+
+# Data files #
+##############
+*.h5
+*.csv
+*.txt
+*.zip
+*.pdf
+
+# ipython checkpoints #
+#######################
+.ipynb_checkpoints/
